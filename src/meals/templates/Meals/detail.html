@@ -1,11 +1,18 @@
-<h1>Meals Detail</h1>
+{% extends 'base.html' %}
+{% block body %}
+   <section id="main-menu" class="menu-cart scroll-reveal">
+       <div class="container">
 
+        <img class="meal_img" src="{{meal_detail.image.url}} " alt="">
+        <h2>{{meal_detail}}</h2>
+        <p>{{meal_detail.description}}</p>
+        <p>for: {{meal_detail.people}} People</p>
+        <p>Preparation Time: {{meal_detail.preperation_time}} Minutes</p>
+        <p>Price: {{meal_detail.price}} Ft</p>
+       </div>
+       <!--.container-->
+   </section>
+   <!--.menu-cart-->
+   {% endblock body%}
 
-
-<h2>{{meal_detail}}</h2>
-
-<h3>{{meal_detail.describtion}}</h3>
-<h3>{{meal_detail.people}}</h3>
-<h3>{{meal_detail.price}}</h3>
-<h3>{{meal_detail.preperation_time}}</h3>
-<img src="{{meal_detail.image.url}}" alt="">
+   
