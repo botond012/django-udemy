@@ -8909,19 +8909,19 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 }
 
 .menu-cart .tabs-content>.tabs-panel.is-active {
-    animation-duration: 1.25s;
+    animation-duration: 0.5s;
     animation-name: fadeOut
 }
 
 .menu-cart .tabs-content>.tabs-panel.is-active {
-    animation-duration: 1.25s;
+    animation-duration: 0.5s;
     animation-name: fadeIn
 }
 
 @media print, screen and (min-width: 40em) {
     .menu-cart .tabs-content>.tabs-panel.is-active {
         animation-name: slideIn, fadeIn;
-        animation-duration: 1.25s
+        animation-duration: 0.5s
     }
 }
 

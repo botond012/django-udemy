@@ -22,18 +22,24 @@
             <!--.divider-->
             <ul class="menu-navigation" data-tabs data-match-height="true" id="example-tabs">
                 {% for category in categories %}
-                <li class="tabs-title is-active"><a class="m-anim" href="#{{category}}" aria-selected="true" data-text="{{category}}">{{category}}</a></li>
+                {% if forloop.counter == 1 %}
+                <li class="tabs-title is-active"><a class="m-anim" data-tabs-target="{{ category|cut:" " }}" href="{{category|cut:" "}}" data-text="{{category}}">{{category}}</a></li>
+                {% else %} 
+                <li class="tabs-title"><a class="m-anim" data-tabs-target="{{category|cut:" "}}" href="{{category|cut:" "}}" data-text="{{category}}">{{category}}</a></li>
+                {% endif %} 
                 {% endfor %}
             </ul>
 
             <div class="tabs-content" data-tabs-content="example-tabs">
                 {% for category in categories %}
-                <div class="tabs-panel is-active" id="{{category}}">
+                {% if forloop.counter == 1 %}
+                <div class="tabs-panel is-active" id="{{category|cut:" "}}">
                     <div class="menu-content">
                         <div class="menu-section">
                             <table>
                             {% for meal in meal_list  %}
-                            {% if meal.category==category %}
+                            {% if forloop.counter|divisibleby:2 and meal.category == category%}
+                            
                             <tr>
                                 <td><a href={% url 'meals:meal_detail' meal.slug%}><span>{{meal.name}} </span></td>
                                 <td><span>{{meal.price}}</span></td>
@@ -50,7 +56,7 @@
                         <div class="menu-section">
                             <table>
                                 {% for meal in meal_list  %}
-                                {% if  meal.category==category%}
+                                {% if not forloop.counter|divisibleby:2 and meal.category == category%}
                                 <tr>
                                     <td><a href={% url 'meals:meal_detail' meal.slug%}><span>{{meal.name}} </span></td>
                                     <td><span>{{meal.price}}</span></td>
@@ -62,11 +68,56 @@
                                 {% endif %}   
                                 {% endfor %}
                                 </table>
-                        </div>
+                        </div> 
                         <!--.menu-section-->
                     </div>
                     <!--.menu-content-->
                 </div>
+                {% else %} 
+                <div class="tabs-panel" id="{{category|cut:" "}}">
+                    <div class="menu-content">
+                        <div class="menu-section">
+                            <table>
+                            {% for meal in meal_list  %}
+                            {% if forloop.counter|divisibleby:2 and meal.category == category%}
+                            
+                            <tr>
+                                <td><a href={% url 'meals:meal_detail' meal.slug%}><span>{{meal.name}} </span></td>
+                                <td><span>{{meal.price}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>{{meal.description}}</td>
+                            </tr>
+                                 
+                            {% endif %}   
+                            {% endfor %}
+                            </table>
+                        </div>
+                        <!--.menu-section-->
+                        <div class="menu-section">
+                            <table>
+                                {% for meal in meal_list  %}
+                                {% if not forloop.counter|divisibleby:2 and meal.category == category%}
+                                <tr>
+                                    <td><a href={% url 'meals:meal_detail' meal.slug%}><span>{{meal.name}} </span></td>
+                                    <td><span>{{meal.price}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td>{{meal.description}}</td>
+                                </tr>
+                                     
+                                {% endif %}   
+                                {% endfor %}
+                                </table>
+                        </div> 
+                        <!--.menu-section-->
+                    </div>
+                    <!--.menu-content-->
+                </div>
+                {% endif %}
+                
+                
+                
                 <!--#panel1-->
                 {% endfor %}    
 
