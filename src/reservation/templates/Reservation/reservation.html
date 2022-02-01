@@ -34,20 +34,28 @@
                 <!--.contact-info-->
                 <div class="contact-form scroll-reveal" data-origin="bottom" data-distance="20%">
                     <h3>Contact us</h3>
-                    {% comment %} <form>
-                        <input type="text" name="name" placeholder="Name">
-                        <input type="email" name="email" placeholder="Email">
-                        <input type="phone2numeric" name="phone" placeholder="Phone">
-                        <input type="number" name="number_of_person" placeholder="Number of Person">
-                        <input type="date" name="date" placeholder="Date">
-                        <input type="time" name="time" placeholder="Time" value="20:00">
-                        <button class="send-form">Send</button>
-                    </form> {% endcomment %}
-                    <form action="" methond="POST">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="name" placeholder="Name" for="{{ form.name }}" >
+                        <input type="email" name="email" placeholder="Email" for="{{ form.email }}" >
+                        <input type="phone2numeric" name="phone" placeholder="Phone" for="{{ form.phone }}">
+                        <input for="{{ form.number_of_person }}">
+                        <input type="date" name="date" placeholder="Date" for="{{ form.date }}">
+                        <input type="time" name="time" placeholder="Time" value="20:00" for="{{ form.time }}">
+                        <button type ="submit" class="send-form">Send</button>
+                    </form> 
+                    {% comment %} <form action="" method="post">
                          {% csrf_token %}
-                         {{form}}   
+                         <div class="fieldWrapper">
+                            {{ form.name }}
+                            {{ form.email }}
+                            {{ form.phone }},
+                            {{ form.number_of_person }}
+                            {{ form.date}}
+                            {{ form.time }}
+                         </div>  
                          <button type ="submit" class="send-form">Send</button>     
-                    </form>
+                    </form> {% endcomment %}
                 </div>
                 <!--.contact-form-->
                 <div class="social-icons scroll-reveal" data-duration="1500">
